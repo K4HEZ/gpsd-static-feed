@@ -1,0 +1,20 @@
+[Unit]
+Description=Feed a fixed lat/lon/alt into gpsd via /dev/gpsd0
+Documentation=file://@INSTALL_DIR@/README.md
+# /dev/gpsd0 is created by systemd-tmpfiles from gpsd-static.tmpfiles.conf
+After=systemd-tmpfiles-setup.service
+Requires=systemd-tmpfiles-setup.service
+Before=gpsd.service
+
+[Service]
+Type=simple
+User=@USER@
+EnvironmentFile=/etc/default/static-gps-feed
+ExecStart=@INSTALL_DIR@/static-gps-feed.py --static-position=${STATIC_POSITION}
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+ReadWritePaths=/dev/gpsd0
+
+[Install]
+WantedBy=multi-user.target

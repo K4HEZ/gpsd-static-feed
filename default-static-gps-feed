@@ -1,0 +1,5 @@
+# Fixed position fed into gpsd, as LAT,LON[,ALT] (decimal degrees, alt in
+# meters). Edit this to YOUR location, then: sudo systemctl restart static-gps-feed
+#
+# Example below is just a placeholder (Richmond, VA) -- replace it.
+STATIC_POSITION=37.6088,-77.3735,65

@@ -1,0 +1,13 @@
+# Lets @USER@ run gpsd-static-ctl.sh unattended (no password prompt),
+# scoped to only these commands. Template -- install.sh substitutes @USER@
+# and installs the rendered file; don't install this one verbatim.
+@USER@ ALL=(root) NOPASSWD: /usr/bin/systemctl start static-gps-feed.service, \
+                            /usr/bin/systemctl stop static-gps-feed.service, \
+                            /usr/bin/systemctl restart static-gps-feed.service, \
+                            /usr/bin/systemctl status static-gps-feed.service, \
+                            /usr/sbin/gpsdctl add /dev/gpsd0, \
+                            /usr/sbin/gpsdctl remove /dev/gpsd0, \
+                            /usr/sbin/gpsdctl add /dev/tty*, \
+                            /usr/sbin/gpsdctl remove /dev/tty*, \
+                            /usr/sbin/gpsdctl add /dev/gps[0-9]*, \
+                            /usr/sbin/gpsdctl remove /dev/gps[0-9]*
